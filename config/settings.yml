@@ -1,0 +1,5 @@
+plugins:
+  private_message_menu:
+    client: true
+    type: list
+    default: "like-count|like|share|flag|edit|bookmark|delete|admin|reply"
