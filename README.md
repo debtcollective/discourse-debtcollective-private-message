@@ -1,6 +1,6 @@
 # discourse-debtcollective-private-message-menu
 
-A plugin to customize private message post-menu items.
+A plugin to customize private message with debtcollective features
 
 ![example](example.png)
 
