@@ -7,6 +7,10 @@ export default {
   name: "private-message-menu",
   initialize() {
     withPluginApi("0.8.9", api => {
+      /**
+       * Reopen widget to render different menuItems
+       * when the topic is a private message
+       *  */
       api.reopenWidget("post-menu", {
         menuItems() {
           const post = this.findAncestorModel();
@@ -20,9 +24,12 @@ export default {
           }
 
           return result;
-        }
+        },
       });
 
+      /**
+       * Reopen widget to remove share attributes in Private Messages
+       */
       api.reopenWidget("post-meta-data", {
         html(attrs) {
           function showReplyTab(attrs, siteSettings) {
@@ -40,7 +47,7 @@ export default {
               h(
                 "div.post-info.whisper",
                 {
-                  attributes: { title: I18n.t("post.whisper") }
+                  attributes: { title: I18n.t("post.whisper") },
                 },
                 iconNode("eye-slash")
               )
@@ -59,13 +66,13 @@ export default {
 
           const attributes = {
             class: "post-date",
-            "data-post-number": attrs.post_number
+            "data-post-number": attrs.post_number,
           };
 
           if (!isPrivateMessage) {
             _.merge(attributes, {
               href: attrs.shareUrl,
-              "data-share-url": attrs.shareUrl
+              "data-share-url": attrs.shareUrl,
             });
           }
 
@@ -103,8 +110,8 @@ export default {
               {
                 className: attrs.read ? "read" : null,
                 attributes: {
-                  title: I18n.t("post.unread")
-                }
+                  title: I18n.t("post.unread"),
+                },
               },
               iconNode("circle")
             )
@@ -117,8 +124,8 @@ export default {
           result.push(h("div.post-infos", postInfo));
 
           return result;
-        }
+        },
       });
     });
-  }
+  },
 };
